@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Model.ShipModel
 {
-    public abstract class ShipData : ScriptableObject
+    public abstract class ShipData : ScriptableObject, IShipData
     {
         [SerializeField] private float health;
         [SerializeField] private float moveSpeed;

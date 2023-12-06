@@ -5,17 +5,13 @@ namespace Presenter.ShipPresenter
 {
     public class ShooterShipPresenter : ShipPresenter
     {
-        private Ship _ship;
-        private ShipView _shipView;
+        private IShip _ship;
+        private IShipView _shipView;
 
-        public ShooterShipPresenter(Ship ship, ShipView shipView) : base(ship, shipView)
+        public ShooterShipPresenter(IShip ship, IShipView shipView) : base(ship, shipView)
         {
             _ship = ship;
             _shipView = shipView;
-        }
-
-        protected override void HandleMovement()
-        {
         }
 
         private void Shoot()

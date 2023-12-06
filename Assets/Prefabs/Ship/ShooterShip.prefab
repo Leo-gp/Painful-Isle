@@ -140,14 +140,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5229740994267333797}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_Mass: 10
+  m_LinearDrag: 2
+  m_AngularDrag: 5
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -171,4 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5289702485c0467c92c79daf173ef0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteForwardOrientation: {x: 0, y: -1}
+  targetShip: {fileID: 0}
   shipData: {fileID: 11400000, guid: 8507bbc4a8adae94f99d21556c724ea0, type: 2}

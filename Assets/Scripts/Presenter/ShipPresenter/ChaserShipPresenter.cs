@@ -5,17 +5,13 @@ namespace Presenter.ShipPresenter
 {
     public class ChaserShipPresenter : ShipPresenter
     {
-        private Ship _ship;
-        private ShipView _shipView;
+        private readonly IShipView _shipView;
+        private IShip _ship;
 
-        public ChaserShipPresenter(Ship ship, ShipView shipView) : base(ship, shipView)
+        public ChaserShipPresenter(IShip ship, IShipView shipView) : base(ship, shipView)
         {
             _ship = ship;
             _shipView = shipView;
-        }
-
-        protected override void HandleMovement()
-        {
         }
 
         private void Explode()

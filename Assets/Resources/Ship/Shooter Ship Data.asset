@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shooter Ship Data
   m_EditorClassIdentifier: 
   health: 100
-  moveSpeed: 10
-  rotationSpeed: 10
+  moveSpeed: 25
+  rotationSpeed: 1
+  forwardOrientation: {x: 0, y: -1}
   frontalShootRate: 1
   sideShootRate: 5

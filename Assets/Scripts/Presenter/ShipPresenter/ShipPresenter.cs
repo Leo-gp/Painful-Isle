@@ -5,19 +5,26 @@ namespace Presenter.ShipPresenter
 {
     public abstract class ShipPresenter
     {
-        private Ship _ship;
-        private ShipView _shipView;
+        private readonly IShipView _shipView;
 
-        protected ShipPresenter(Ship ship, ShipView shipView)
+        protected ShipPresenter(IShip ship, IShipView shipView)
         {
-            _ship = ship;
+            Ship = ship;
             _shipView = shipView;
         }
 
-        protected abstract void HandleMovement();
+        public IShip Ship { get; }
 
-        private void HandleRotation()
+        public void HandleMovement(float moveInput)
         {
+            _shipView.Move(moveInput * Ship.ShipData.MoveSpeed);
+            Ship.Position = _shipView.Position;
+        }
+
+        public void HandleRotation(float rotationInput)
+        {
+            _shipView.Rotate(rotationInput * Ship.ShipData.RotationSpeed);
+            Ship.RotationAngle = _shipView.Rotation;
         }
 
         private void TakeDamage()
