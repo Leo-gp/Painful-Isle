@@ -46,15 +46,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SlowRotate"",
-                    ""type"": ""Button"",
-                    ""id"": ""2be93437-938b-4e90-8ad8-02de0583086b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""FrontalShoot"",
                     ""type"": ""Button"",
                     ""id"": ""26ba2bdd-1162-4f8e-b571-d9004cdc8505"",
@@ -258,17 +249,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""LeftShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1e239bd0-5be0-4f1b-9e2f-8f20c99aa95f"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SlowRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -361,7 +341,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
         m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
         m_Ship_Rotate = m_Ship.FindAction("Rotate", throwIfNotFound: true);
-        m_Ship_SlowRotate = m_Ship.FindAction("SlowRotate", throwIfNotFound: true);
         m_Ship_FrontalShoot = m_Ship.FindAction("FrontalShoot", throwIfNotFound: true);
         m_Ship_RightShoot = m_Ship.FindAction("RightShoot", throwIfNotFound: true);
         m_Ship_LeftShoot = m_Ship.FindAction("LeftShoot", throwIfNotFound: true);
@@ -432,7 +411,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IShipActions> m_ShipActionsCallbackInterfaces = new List<IShipActions>();
     private readonly InputAction m_Ship_Move;
     private readonly InputAction m_Ship_Rotate;
-    private readonly InputAction m_Ship_SlowRotate;
     private readonly InputAction m_Ship_FrontalShoot;
     private readonly InputAction m_Ship_RightShoot;
     private readonly InputAction m_Ship_LeftShoot;
@@ -442,7 +420,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public ShipActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Ship_Move;
         public InputAction @Rotate => m_Wrapper.m_Ship_Rotate;
-        public InputAction @SlowRotate => m_Wrapper.m_Ship_SlowRotate;
         public InputAction @FrontalShoot => m_Wrapper.m_Ship_FrontalShoot;
         public InputAction @RightShoot => m_Wrapper.m_Ship_RightShoot;
         public InputAction @LeftShoot => m_Wrapper.m_Ship_LeftShoot;
@@ -461,9 +438,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
-            @SlowRotate.started += instance.OnSlowRotate;
-            @SlowRotate.performed += instance.OnSlowRotate;
-            @SlowRotate.canceled += instance.OnSlowRotate;
             @FrontalShoot.started += instance.OnFrontalShoot;
             @FrontalShoot.performed += instance.OnFrontalShoot;
             @FrontalShoot.canceled += instance.OnFrontalShoot;
@@ -483,9 +457,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
-            @SlowRotate.started -= instance.OnSlowRotate;
-            @SlowRotate.performed -= instance.OnSlowRotate;
-            @SlowRotate.canceled -= instance.OnSlowRotate;
             @FrontalShoot.started -= instance.OnFrontalShoot;
             @FrontalShoot.performed -= instance.OnFrontalShoot;
             @FrontalShoot.canceled -= instance.OnFrontalShoot;
@@ -588,7 +559,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnSlowRotate(InputAction.CallbackContext context);
         void OnFrontalShoot(InputAction.CallbackContext context);
         void OnRightShoot(InputAction.CallbackContext context);
         void OnLeftShoot(InputAction.CallbackContext context);

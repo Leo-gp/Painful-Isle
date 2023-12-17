@@ -4,9 +4,11 @@ namespace Model.ShipModel
 {
     public interface IShip
     {
-        IShipData ShipData { get; }
+        float MaxHealth { get; }
+        float MoveSpeed { get; }
+        float RotationSpeed { get; }
         float CurrentHealth { get; set; }
-        Deterioration Deterioration { get; set; }
+        ShipDeterioration ShipDeterioration { get; set; }
         Vector2 Position { get; set; }
         float RotationAngle { get; set; }
     }

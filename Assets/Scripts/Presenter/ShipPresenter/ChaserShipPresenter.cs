@@ -5,17 +5,26 @@ namespace Presenter.ShipPresenter
 {
     public class ChaserShipPresenter : ShipPresenter
     {
-        private readonly IShipView _shipView;
-        private IShip _ship;
+        private readonly IChaserShipView _chaserShipView;
 
-        public ChaserShipPresenter(IShip ship, IShipView shipView) : base(ship, shipView)
+        public ChaserShipPresenter(IShip ship, IChaserShipView chaserShipView) : base(ship, chaserShipView)
         {
-            _ship = ship;
-            _shipView = shipView;
+            _chaserShipView = chaserShipView;
         }
 
-        private void Explode()
+        public void OnEnable()
         {
+            _chaserShipView.OnCollidedWithShip += HandleShipCollision;
+        }
+
+        public void OnDisable()
+        {
+            _chaserShipView.OnCollidedWithShip -= HandleShipCollision;
+        }
+
+        private void HandleShipCollision(IShipView collidedShipView)
+        {
+            if (collidedShipView is PlayerShooterShipView) Explode();
         }
     }
 }

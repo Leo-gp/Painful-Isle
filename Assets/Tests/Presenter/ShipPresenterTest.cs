@@ -25,7 +25,7 @@ namespace Tests.Presenter
         private ShipPresenter _shipPresenter;
 
         [Test]
-        public void HandleMovement_ShouldMoveShipViewAndSetPosition()
+        public void Move_ShouldMoveShipViewAndSetPosition()
         {
             const float moveInput = 1f;
             const float shipMoveSpeed = 10f;
@@ -33,17 +33,17 @@ namespace Tests.Presenter
 
             const float expectedMove = moveInput * shipMoveSpeed;
 
-            _ship.ShipData.MoveSpeed.Returns(shipMoveSpeed);
+            _ship.MoveSpeed.Returns(shipMoveSpeed);
             _shipView.Position.Returns(shipViewPosition);
 
-            _shipPresenter.HandleMovement(moveInput);
+            _shipPresenter.Move(moveInput);
 
             _shipView.Received().Move(expectedMove);
             _ship.Received().Position = shipViewPosition;
         }
 
         [Test]
-        public void HandleRotation_ShouldRotateShipViewAndSetRotationAngle()
+        public void Rotate_ShouldRotateShipViewAndSetRotationAngle()
         {
             const float rotationInput = 1f;
             const float shipRotationSpeed = 10f;
@@ -51,10 +51,10 @@ namespace Tests.Presenter
 
             const float expectedRotation = rotationInput * shipRotationSpeed;
 
-            _ship.ShipData.RotationSpeed.Returns(shipRotationSpeed);
+            _ship.RotationSpeed.Returns(shipRotationSpeed);
             _shipView.Rotation.Returns(shipViewRotation);
 
-            _shipPresenter.HandleRotation(rotationInput);
+            _shipPresenter.Rotate(rotationInput);
 
             _shipView.Received().Rotate(expectedRotation);
             _ship.Received().RotationAngle = shipViewRotation;

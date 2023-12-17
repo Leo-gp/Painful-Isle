@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7338416428730663851}
   - component: {fileID: 4856542797841702074}
   - component: {fileID: 5911016800731716359}
+  - component: {fileID: 2134077336773009827}
   m_Layer: 0
   m_Name: ChaserShip
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 473680897b4a0d04494b37f681f0cd7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a32dc6b1a521e14698f7869c4e9ae15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,6 +172,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a74a43e71f49f7b5d897297c9ed435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteForwardOrientation: {x: 0, y: -1}
-  targetShip: {fileID: 0}
-  shipData: {fileID: 11400000, guid: 0ba85fcd946d5c44b8846f3616573434, type: 2}
+  shipData: {fileID: 11400000, guid: 67637bb4f3234c04384b8382fdea01bb, type: 2}
+--- !u!114 &2134077336773009827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57864075610958079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df96955efdf4417d984e97f99bf41554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cannonBallViewPrefab: {fileID: 7672860435337186500, guid: e6791530c7e5e4a4a9aebf87745c0d25, type: 3}

@@ -1,7 +1,6 @@
-using Model.ShipModel;
+using Model.ShipModel.ShipInputHandler;
 using Presenter.ShipPresenter;
 using UnityEngine;
-using View.Input;
 using Vector2 = System.Numerics.Vector2;
 
 namespace View.ShipView
@@ -11,40 +10,36 @@ namespace View.ShipView
     [RequireComponent(typeof(Collider2D))]
     public abstract class ShipView : MonoBehaviour, IShipView
     {
-        public ShipView targetShip; // TODO: Remove. Testing only
-
+        private Collider2D _collider;
         private Rigidbody2D _rb;
-        private IShipInputHandler _shipInputHandler;
-        private ShipPresenter _shipPresenter;
         private SpriteRenderer _spriteRenderer;
+
+        protected IShipInputHandler ShipInputHandler;
 
         protected virtual void Awake()
         {
+            _collider = GetComponent<Collider2D>();
             _rb = GetComponent<Rigidbody2D>();
-            _shipPresenter = CreateShipPresenter();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            ShipPresenter = CreateShipPresenter();
+            ShipInputHandler = CreateShipInputHandler();
         }
 
-        private void Start()
+        protected virtual void Update()
         {
-            // TODO: Remove. Testing only
-            if (targetShip != null)
-                _shipInputHandler = new AIChaserShipInputHandler(_shipPresenter.Ship, targetShip._shipPresenter.Ship);
-            else
-                _shipInputHandler = new PlayerShooterShipInputHandler();
+            ShipPresenter.Move(ShipInputHandler.MoveInput);
+            ShipPresenter.Rotate(ShipInputHandler.RotateInput);
         }
 
-        private void Update()
-        {
-            _shipPresenter.HandleMovement(_shipInputHandler.MoveInput);
-            _shipPresenter.HandleRotation(_shipInputHandler.RotateInput);
-        }
-
-        protected abstract void OnCollisionEnter2D(Collision2D other);
+        public IShipPresenter ShipPresenter { get; private set; }
 
         public Vector2 Position => new(transform.position.x, transform.position.y);
 
         public float Rotation => transform.eulerAngles.z;
+
+        public Vector2 UpVector => new(-transform.up.x, -transform.up.y);
+
+        public Vector2 RightVector => new(-transform.right.x, -transform.right.y);
 
         public void Move(float force)
         {
@@ -56,6 +51,14 @@ namespace View.ShipView
             _rb.rotation -= angle;
         }
 
-        protected abstract ShipPresenter CreateShipPresenter();
+        public void Explode()
+        {
+            _collider.enabled = false;
+            ShipInputHandler.DisableInputs();
+        }
+
+        protected abstract IShipPresenter CreateShipPresenter();
+
+        protected abstract IShipInputHandler CreateShipInputHandler();
     }
 }

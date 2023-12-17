@@ -1,20 +1,40 @@
-using Model.ShipModel;
+using Model.ShipModel.ShipInputHandler;
 using Presenter.ShipPresenter;
 using UnityEngine;
+using View.CannonBallView;
+using Vector2 = System.Numerics.Vector2;
 
 namespace View.ShipView
 {
-    public class ShooterShipView : ShipView
+    [RequireComponent(typeof(CannonBallLauncherView))]
+    public abstract class ShooterShipView : ShipView, IShooterShipView
     {
-        [SerializeField] private ShooterShipData shipData;
+        private CannonBallLauncherView _cannonBallLauncherView;
+        private IShooterShipInputHandler _shipInputHandler;
+        private IShooterShipPresenter _shipPresenter;
 
-        protected override void OnCollisionEnter2D(Collision2D other)
+        protected override void Awake()
         {
+            base.Awake();
+            _cannonBallLauncherView = GetComponent<CannonBallLauncherView>();
+            _shipPresenter = ShipPresenter as IShooterShipPresenter;
+            _shipInputHandler = ShipInputHandler as IShooterShipInputHandler;
         }
 
-        protected override ShipPresenter CreateShipPresenter()
+        protected override void Update()
         {
-            return new ShooterShipPresenter(new Ship(shipData), this);
+            base.Update();
+
+            if (_shipInputHandler.FrontalShootInput) _shipPresenter.FrontalShoot();
+
+            _shipPresenter.UpdateShootCooldown(Time.deltaTime);
+        }
+
+        public void Shoot(Vector2 position, Vector2 direction)
+        {
+            var pos = new UnityEngine.Vector2(position.X, position.Y);
+            var dir = new UnityEngine.Vector2(direction.X, direction.Y);
+            _cannonBallLauncherView.LaunchCannonBall(pos, dir, this);
         }
     }
 }

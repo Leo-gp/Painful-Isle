@@ -1,26 +1,13 @@
-using Model.ShipModel;
-using UnityEngine;
+using Model.ShipModel.ShipInputHandler;
 
 namespace View.Input
 {
-    public class PlayerShooterShipInputHandler : IShooterShipInputHandler
+    public class PlayerShooterShipInputHandler : PlayerShipInputHandler, IShooterShipInputHandler
     {
-        private readonly InputActions _inputActions;
+        public bool RightShootInput => InputActions.Ship.RightShoot.WasPerformedThisFrame();
 
-        public PlayerShooterShipInputHandler()
-        {
-            _inputActions = new InputActions();
-            _inputActions.Ship.Enable();
-        }
+        public bool LeftShootInput => InputActions.Ship.LeftShoot.WasPerformedThisFrame();
 
-        public float MoveInput => _inputActions.Ship.Move.ReadValue<Vector2>().y;
-
-        public float RotateInput => _inputActions.Ship.Rotate.ReadValue<Vector2>().x;
-
-        public bool FrontalShootInput => _inputActions.Ship.FrontalShoot.WasPerformedThisFrame();
-
-        public bool RightShootInput => _inputActions.Ship.RightShoot.WasPerformedThisFrame();
-
-        public bool LeftShootInput => _inputActions.Ship.LeftShoot.WasPerformedThisFrame();
+        public bool FrontalShootInput => InputActions.Ship.FrontalShoot.WasPerformedThisFrame();
     }
 }

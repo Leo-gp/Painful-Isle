@@ -3,35 +3,36 @@ using View.ShipView;
 
 namespace Presenter.ShipPresenter
 {
-    public abstract class ShipPresenter
+    public abstract class ShipPresenter : IShipPresenter
     {
-        private readonly IShipView _shipView;
-
         protected ShipPresenter(IShip ship, IShipView shipView)
         {
             Ship = ship;
-            _shipView = shipView;
+            ShipView = shipView;
         }
 
         public IShip Ship { get; }
 
-        public void HandleMovement(float moveInput)
+        public IShipView ShipView { get; }
+
+        public void Move(float force)
         {
-            _shipView.Move(moveInput * Ship.ShipData.MoveSpeed);
-            Ship.Position = _shipView.Position;
+            ShipView.Move(force * Ship.MoveSpeed);
+            Ship.Position = ShipView.Position;
         }
 
-        public void HandleRotation(float rotationInput)
+        public void Rotate(float angle)
         {
-            _shipView.Rotate(rotationInput * Ship.ShipData.RotationSpeed);
-            Ship.RotationAngle = _shipView.Rotation;
+            ShipView.Rotate(angle * Ship.RotationSpeed);
+            Ship.RotationAngle = ShipView.Rotation;
+        }
+
+        protected void Explode()
+        {
+            ShipView.Explode();
         }
 
         private void TakeDamage()
-        {
-        }
-
-        private void Die()
         {
         }
     }
