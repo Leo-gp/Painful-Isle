@@ -15,5 +15,6 @@ MonoBehaviour:
   health: 100
   moveSpeed: 25
   rotationSpeed: 1
+  deteriorationConfiguration: {fileID: 11400000, guid: ccf929c12a9b91b48b69e255361d8a7c, type: 2}
   frontalShootCooldown: 1
   sideShootCooldown: 5

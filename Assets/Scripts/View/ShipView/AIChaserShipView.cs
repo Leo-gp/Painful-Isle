@@ -31,12 +31,22 @@ namespace View.ShipView
             return new AIShipInputHandler(ship, ShipPresenter);
         }
 
-        private IAIShip CreateShip()
+        private IChaserShip CreateShip()
         {
             var maxHealth = shipData.Health;
             var moveSpeed = shipData.MoveSpeed;
             var rotationSpeed = shipData.RotationSpeed;
-            return new AIChaserShip(maxHealth, moveSpeed, rotationSpeed, _target);
+            var deteriorationConfiguration = shipData.DeteriorationConfiguration;
+            var explosionDamage = shipData.ExplosionDamage;
+            return new AIChaserShip
+            (
+                maxHealth,
+                moveSpeed,
+                rotationSpeed,
+                deteriorationConfiguration,
+                explosionDamage,
+                _target
+            );
         }
     }
 }

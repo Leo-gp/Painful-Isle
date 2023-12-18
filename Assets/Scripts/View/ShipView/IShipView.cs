@@ -1,4 +1,5 @@
 using System.Numerics;
+using Model.ShipModel;
 using Presenter.ShipPresenter;
 
 namespace View.ShipView
@@ -22,5 +23,7 @@ namespace View.ShipView
         void Explode();
 
         void UpdateHealthBarSlider(float percentage);
+
+        void UpdateDeterioration(ShipDeterioration shipDeterioration);
     }
 }

@@ -5,13 +5,19 @@ namespace Presenter.ShipPresenter
 {
     public class AIChaserShipPresenter : ChaserShipPresenter
     {
-        public AIChaserShipPresenter(IShip ship, IChaserShipView chaserShipView) : base(ship, chaserShipView)
+        private readonly IChaserShip _ship;
+
+        public AIChaserShipPresenter(IChaserShip ship, IChaserShipView chaserShipView) : base(ship, chaserShipView)
         {
+            _ship = Ship as IChaserShip;
         }
 
         protected override void HandleShipCollision(IShipView collidedShipView)
         {
-            if (collidedShipView is IPlayerShooterShipView) TakeDamage(Ship.CurrentHealth);
+            if (collidedShipView is not IPlayerShooterShipView) return;
+
+            collidedShipView.ShipPresenter.TakeDamage(_ship.ExplosionDamage);
+            TakeDamage(_ship.CurrentHealth);
         }
     }
 }

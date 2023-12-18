@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97234a82fdf413b9eef000c300b77df, type: 3}
+  m_Name: Player Ship Deterioration View Configurations
+  m_EditorClassIdentifier: 
+  deteriorationViewDefinitions:
+  - deterioration: 0
+    sprite: {fileID: 21300000, guid: 473680897b4a0d04494b37f681f0cd7a, type: 3}
+  - deterioration: 1
+    sprite: {fileID: 21300000, guid: f262ac9f5b033a444b1426d9fe5aae8c, type: 3}
+  - deterioration: 2
+    sprite: {fileID: 21300000, guid: 0ddb19c54a2ed3346a4f3e9d9ff77213, type: 3}
+  - deterioration: 3
+    sprite: {fileID: 21300000, guid: cc083c6fc29707b4da64cfb7a33b1457, type: 3}

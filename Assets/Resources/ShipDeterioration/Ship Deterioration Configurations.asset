@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dba7cc9ecaa4e2f9748ab676136fa97, type: 3}
-  m_Name: Chaser Ship Data
+  m_Script: {fileID: 11500000, guid: ecfb2564043b4c7fbec3dad9b5e866f7, type: 3}
+  m_Name: Ship Deterioration Configurations
   m_EditorClassIdentifier: 
-  health: 50
-  moveSpeed: 10
-  rotationSpeed: 1
-  deteriorationConfiguration: {fileID: 11400000, guid: ccf929c12a9b91b48b69e255361d8a7c, type: 2}
-  explosionDamage: 25
+  deteriorationDefinitions:
+  - health: 0
+    deterioration: 3
+  - health: 25
+    deterioration: 2
+  - health: 50
+    deterioration: 1
+  - health: 100
+    deterioration: 0

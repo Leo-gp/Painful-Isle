@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Model.CannonBallModel.CannonBallData
 {
-    [CreateAssetMenu(menuName = "Create Cannon Ball Data", fileName = "Cannon Ball Data")]
+    [CreateAssetMenu(menuName = "Data/Create Cannon Ball Data", fileName = "Cannon Ball Data")]
     public class CannonBallData : ScriptableObject
     {
         [SerializeField] private float speed;

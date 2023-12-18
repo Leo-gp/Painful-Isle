@@ -30,5 +30,10 @@ namespace View.UI
         {
             slider.value = percentage * slider.maxValue / 100f;
         }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

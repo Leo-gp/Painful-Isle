@@ -1,3 +1,5 @@
+using Model.ShipModel.ShipData;
+
 namespace Model.ShipModel
 {
     public class AIShooterShip : ShooterShip, IAIShooterShip
@@ -7,10 +9,11 @@ namespace Model.ShipModel
             float maxHealth,
             float moveSpeed,
             float rotationSpeed,
+            ShipDeteriorationConfiguration deteriorationConfiguration,
             float frontalShootCooldown,
             IShip target,
             float shootingRange
-        ) : base(maxHealth, moveSpeed, rotationSpeed, frontalShootCooldown)
+        ) : base(maxHealth, moveSpeed, rotationSpeed, deteriorationConfiguration, frontalShootCooldown)
         {
             Target = target;
             ShootingRange = shootingRange;

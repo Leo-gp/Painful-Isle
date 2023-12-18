@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarViewPrefab: {fileID: 8219736932878036138, guid: f25b73c3d49aea945892c7252bb99baf, type: 3}
+  shipDeteriorationConfigurationView: {fileID: 11400000, guid: 4d158639777adf74e91c7e381694cc43, type: 2}
+  firePrefab: {fileID: 7602889776947248646, guid: eb662f627977bac45a29e0f6f7c776df, type: 3}
+  fireTime: 5
   shipData: {fileID: 11400000, guid: 67637bb4f3234c04384b8382fdea01bb, type: 2}
 --- !u!114 &2134077336773009827
 MonoBehaviour:

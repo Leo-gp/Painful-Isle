@@ -62,7 +62,7 @@ namespace Tests.Presenter
 
         [Test]
         public void
-            TakeDamage_WhenAmountIsGreaterOrEqualCurrentHealth_ShouldSetCurrentHealthToZeroAndExplodeAndUpdateHealthBarSlider()
+            TakeDamage_WhenAmountIsGreaterOrEqualCurrentHealth_ShouldSetCurrentHealthToZeroAndAndExplodeAndUpdateHealthBarSlider()
         {
             const float amount = 15f;
             const float currentHealth = 10f;

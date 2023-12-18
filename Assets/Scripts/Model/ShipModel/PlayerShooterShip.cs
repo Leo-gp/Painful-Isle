@@ -1,3 +1,5 @@
+using Model.ShipModel.ShipData;
+
 namespace Model.ShipModel
 {
     public class PlayerShooterShip : ShooterShip, IPlayerShooterShip
@@ -7,9 +9,10 @@ namespace Model.ShipModel
             float maxHealth,
             float moveSpeed,
             float rotationSpeed,
+            ShipDeteriorationConfiguration deteriorationConfiguration,
             float frontalShootCooldown,
             float sideShootCooldown
-        ) : base(maxHealth, moveSpeed, rotationSpeed, frontalShootCooldown)
+        ) : base(maxHealth, moveSpeed, rotationSpeed, deteriorationConfiguration, frontalShootCooldown)
         {
             SideShootCooldown = sideShootCooldown;
         }

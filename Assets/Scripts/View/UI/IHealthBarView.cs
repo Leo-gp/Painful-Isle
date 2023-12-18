@@ -7,5 +7,7 @@ namespace View.UI
         void Initialize(IShip ship);
 
         void UpdateHealthBarSlider(float value);
+
+        void Destroy();
     }
 }

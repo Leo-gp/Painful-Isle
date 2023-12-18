@@ -1,3 +1,5 @@
+using System.Linq;
+using Model.ShipModel;
 using Model.ShipModel.ShipInputHandler;
 using Presenter.ShipPresenter;
 using UnityEngine;
@@ -12,6 +14,9 @@ namespace View.ShipView
     public abstract class ShipView : MonoBehaviour, IShipView
     {
         [SerializeField] private HealthBarView healthBarViewPrefab;
+        [SerializeField] private ShipDeteriorationConfigurationView shipDeteriorationConfigurationView;
+        [SerializeField] private GameObject firePrefab;
+        [SerializeField] private float fireTime;
 
         private Collider2D _collider;
         private IHealthBarView _healthBarView;
@@ -59,11 +64,25 @@ namespace View.ShipView
         public void Explode()
         {
             _collider.enabled = false;
+            _healthBarView.Destroy();
+            var t = transform;
+            var fire = Instantiate(firePrefab, t.position, Quaternion.identity, t);
+            Destroy(fire, fireTime);
+            Destroy(gameObject, fireTime);
         }
 
         public void UpdateHealthBarSlider(float percentage)
         {
             _healthBarView.UpdateHealthBarSlider(percentage);
+        }
+
+        public void UpdateDeterioration(ShipDeterioration shipDeterioration)
+        {
+            var sprite = shipDeteriorationConfigurationView.DeteriorationViewDefinitions
+                .Where(definition => definition.Deterioration == shipDeterioration)
+                .Select(definition => definition.Sprite)
+                .FirstOrDefault();
+            _spriteRenderer.sprite = sprite;
         }
 
         private IHealthBarView CreateHealthBarView()

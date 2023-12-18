@@ -37,9 +37,19 @@ namespace View.ShipView
             var maxHealth = shipData.Health;
             var moveSpeed = shipData.MoveSpeed;
             var rotationSpeed = shipData.RotationSpeed;
+            var deteriorationConfiguration = shipData.DeteriorationConfiguration;
             var frontalShootCooldown = shipData.FrontalShootCooldown;
             var shootingRange = shipData.ShootingRange;
-            return new AIShooterShip(maxHealth, moveSpeed, rotationSpeed, frontalShootCooldown, _target, shootingRange);
+            return new AIShooterShip
+            (
+                maxHealth,
+                moveSpeed,
+                rotationSpeed,
+                deteriorationConfiguration,
+                frontalShootCooldown,
+                _target,
+                shootingRange
+            );
         }
     }
 }

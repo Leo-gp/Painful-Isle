@@ -1,16 +1,23 @@
 using System.Numerics;
+using Model.ShipModel.ShipData;
 
 namespace Model.ShipModel
 {
     public abstract class Ship : IShip
     {
-        protected Ship(float maxHealth, float moveSpeed, float rotationSpeed)
+        protected Ship
+        (
+            float maxHealth,
+            float moveSpeed,
+            float rotationSpeed,
+            ShipDeteriorationConfiguration deteriorationConfiguration
+        )
         {
             MaxHealth = maxHealth;
             MoveSpeed = moveSpeed;
             RotationSpeed = rotationSpeed;
             CurrentHealth = maxHealth;
-            ShipDeterioration = ShipDeterioration.Healthy;
+            DeteriorationConfiguration = deteriorationConfiguration;
         }
 
         public float MaxHealth { get; }
@@ -21,7 +28,9 @@ namespace Model.ShipModel
 
         public float CurrentHealth { get; set; }
 
-        public ShipDeterioration ShipDeterioration { get; set; }
+        public ShipDeterioration Deterioration { get; set; }
+
+        public ShipDeteriorationConfiguration DeteriorationConfiguration { get; }
 
         public Vector2 Position { get; set; }
 

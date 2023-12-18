@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b5d0d05be9d889c47ac6c3783d96d509, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b78d1b8d48fb6c84497a2c1267c380a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarViewPrefab: {fileID: 8219736932878036138, guid: f25b73c3d49aea945892c7252bb99baf, type: 3}
+  shipDeteriorationConfigurationView: {fileID: 11400000, guid: 3734f6faaeb83f24b864e710923d9882, type: 2}
+  firePrefab: {fileID: 7602889776947248646, guid: eb662f627977bac45a29e0f6f7c776df, type: 3}
+  fireTime: 5
   shipData: {fileID: 11400000, guid: 10fe97b972b7790408e39306fb92f8ce, type: 2}
 --- !u!114 &6197667904344031132
 MonoBehaviour:

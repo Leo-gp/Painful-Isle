@@ -38,7 +38,8 @@ namespace View.ShipView
 
         protected override IShipInputHandler CreateShipInputHandler()
         {
-            return new PlayerShooterShipInputHandler();
+            var shipPresenter = ShipPresenter as IPlayerShooterShipPresenter;
+            return new PlayerShooterShipInputHandler(shipPresenter);
         }
 
         private IPlayerShooterShip CreateShip()
@@ -46,9 +47,18 @@ namespace View.ShipView
             var maxHealth = shipData.Health;
             var moveSpeed = shipData.MoveSpeed;
             var rotationSpeed = shipData.RotationSpeed;
+            var deteriorationConfiguration = shipData.DeteriorationConfiguration;
             var frontalShootCooldown = shipData.FrontalShootCooldown;
             var sideShootCooldown = shipData.SideShootCooldown;
-            return new PlayerShooterShip(maxHealth, moveSpeed, rotationSpeed, frontalShootCooldown, sideShootCooldown);
+            return new PlayerShooterShip
+            (
+                maxHealth,
+                moveSpeed,
+                rotationSpeed,
+                deteriorationConfiguration,
+                frontalShootCooldown,
+                sideShootCooldown
+            );
         }
     }
 }

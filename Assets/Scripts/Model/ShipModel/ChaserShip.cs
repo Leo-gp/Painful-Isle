@@ -2,20 +2,20 @@ using Model.ShipModel.ShipData;
 
 namespace Model.ShipModel
 {
-    public abstract class ShooterShip : Ship, IShooterShip
+    public abstract class ChaserShip : Ship, IChaserShip
     {
-        protected ShooterShip
+        protected ChaserShip
         (
             float maxHealth,
             float moveSpeed,
             float rotationSpeed,
             ShipDeteriorationConfiguration deteriorationConfiguration,
-            float frontalShootCooldown
+            float explosionDamage
         ) : base(maxHealth, moveSpeed, rotationSpeed, deteriorationConfiguration)
         {
-            FrontalShootCooldown = frontalShootCooldown;
+            ExplosionDamage = explosionDamage;
         }
 
-        public float FrontalShootCooldown { get; }
+        public float ExplosionDamage { get; }
     }
 }
