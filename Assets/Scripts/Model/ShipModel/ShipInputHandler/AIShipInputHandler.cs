@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Presenter.ShipPresenter;
 
 namespace Model.ShipModel.ShipInputHandler
 {
@@ -15,24 +16,19 @@ namespace Model.ShipModel.ShipInputHandler
         private const float Rad2Deg = 180f / MathF.PI;
 
         private readonly IAIShip _ship;
+        private readonly IShipPresenter _shipPresenter;
 
         private float _currentRotationInput;
-        private bool _inputsEnabled;
 
-        public AIShipInputHandler(IAIShip ship)
+        public AIShipInputHandler(IAIShip ship, IShipPresenter shipPresenter)
         {
             _ship = ship;
-            _inputsEnabled = true;
+            _shipPresenter = shipPresenter;
         }
 
-        public virtual float MoveInput => _inputsEnabled ? MoveInputValue : 0f;
+        public float MoveInput => _shipPresenter.CanMove() ? MoveInputValue : 0f;
 
-        public float RotateInput => _inputsEnabled ? CalculateRotationInput() : 0f;
-
-        public void DisableInputs()
-        {
-            _inputsEnabled = false;
-        }
+        public float RotateInput => _shipPresenter.CanRotate() ? CalculateRotationInput() : 0f;
 
         private float CalculateRotationInput()
         {

@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b108f43cee1d4fb6b222b0eb58251d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarViewPrefab: {fileID: 8219736932878036138, guid: f25b73c3d49aea945892c7252bb99baf, type: 3}
   shipData: {fileID: 11400000, guid: 10fe97b972b7790408e39306fb92f8ce, type: 2}
 --- !u!114 &6197667904344031132
 MonoBehaviour:

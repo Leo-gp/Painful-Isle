@@ -5,7 +5,5 @@ namespace Model.ShipModel.ShipInputHandler
         float MoveInput { get; }
 
         float RotateInput { get; }
-
-        void DisableInputs();
     }
 }

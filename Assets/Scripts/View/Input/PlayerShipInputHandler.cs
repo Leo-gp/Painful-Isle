@@ -16,10 +16,5 @@ namespace View.Input
         public float MoveInput => InputActions.Ship.Move.ReadValue<Vector2>().y;
 
         public float RotateInput => InputActions.Ship.Rotate.ReadValue<Vector2>().x;
-
-        public void DisableInputs() 
-        {
-            InputActions.Ship.Disable();
-        }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 715290406078562874}
   - component: {fileID: 6710371830982202122}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7eadfb57a74ea1a2d96454f18b306b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarViewPrefab: {fileID: 8219736932878036138, guid: f25b73c3d49aea945892c7252bb99baf, type: 3}
   shipData: {fileID: 11400000, guid: 6a5ab730a84f97c4eaa213e66d226042, type: 2}
 --- !u!114 &6710371830982202122
 MonoBehaviour:

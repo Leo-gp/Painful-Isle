@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3575395369326794297}
   - component: {fileID: 7338416428730663851}
   - component: {fileID: 4856542797841702074}
-  - component: {fileID: 5911016800731716359}
+  - component: {fileID: 8398493291182236046}
   - component: {fileID: 2134077336773009827}
   m_Layer: 0
   m_Name: ChaserShip
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 57864075610958079}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5911016800731716359
+--- !u!114 &8398493291182236046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,9 +169,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 57864075610958079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4a74a43e71f49f7b5d897297c9ed435, type: 3}
+  m_Script: {fileID: 11500000, guid: 174a529a59bf417d824771991306bf6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarViewPrefab: {fileID: 8219736932878036138, guid: f25b73c3d49aea945892c7252bb99baf, type: 3}
   shipData: {fileID: 11400000, guid: 67637bb4f3234c04384b8382fdea01bb, type: 2}
 --- !u!114 &2134077336773009827
 MonoBehaviour:

@@ -12,5 +12,11 @@ namespace Presenter.ShipPresenter
         void Move(float force);
 
         void Rotate(float angle);
+
+        void TakeDamage(float amount);
+
+        bool CanMove();
+
+        bool CanRotate();
     }
 }

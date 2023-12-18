@@ -3,11 +3,11 @@ using View.ShipView;
 
 namespace Presenter.ShipPresenter
 {
-    public class ChaserShipPresenter : ShipPresenter
+    public abstract class ChaserShipPresenter : ShipPresenter
     {
         private readonly IChaserShipView _chaserShipView;
 
-        public ChaserShipPresenter(IShip ship, IChaserShipView chaserShipView) : base(ship, chaserShipView)
+        protected ChaserShipPresenter(IShip ship, IChaserShipView chaserShipView) : base(ship, chaserShipView)
         {
             _chaserShipView = chaserShipView;
         }
@@ -22,9 +22,6 @@ namespace Presenter.ShipPresenter
             _chaserShipView.OnCollidedWithShip -= HandleShipCollision;
         }
 
-        private void HandleShipCollision(IShipView collidedShipView)
-        {
-            if (collidedShipView is PlayerShooterShipView) Explode();
-        }
+        protected abstract void HandleShipCollision(IShipView collidedShipView);
     }
 }

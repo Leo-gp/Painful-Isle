@@ -7,18 +7,18 @@ using View.Input;
 
 namespace View.ShipView
 {
-    public class PlayerShooterShipView : ShooterShipView
+    public class PlayerShooterShipView : ShooterShipView, IPlayerShooterShipView
     {
         [SerializeField] private PlayerShooterShipData shipData;
 
-        private PlayerShooterShipInputHandler _shipInputHandler;
-        private PlayerShooterShipPresenter _shipPresenter;
+        private IPlayerShooterShipInputHandler _shipInputHandler;
+        private IPlayerShooterShipPresenter _shipPresenter;
 
         protected override void Awake()
         {
             base.Awake();
-            _shipPresenter = ShipPresenter as PlayerShooterShipPresenter;
-            _shipInputHandler = ShipInputHandler as PlayerShooterShipInputHandler;
+            _shipPresenter = ShipPresenter as IPlayerShooterShipPresenter;
+            _shipInputHandler = ShipInputHandler as IPlayerShooterShipInputHandler;
         }
 
         protected override void Update()
@@ -41,7 +41,7 @@ namespace View.ShipView
             return new PlayerShooterShipInputHandler();
         }
 
-        private PlayerShooterShip CreateShip()
+        private IPlayerShooterShip CreateShip()
         {
             var maxHealth = shipData.Health;
             var moveSpeed = shipData.MoveSpeed;

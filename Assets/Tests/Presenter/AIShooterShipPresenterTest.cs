@@ -22,56 +22,49 @@ namespace Tests.Presenter
 
         private AIShooterShipPresenter _shipPresenter;
 
-        [Test]
-        public void CanShoot_WhenRemainingTimeForShootIsNotZero_ShouldReturnFalse()
+        [TestCase(true, 0f, true, false)]
+        [TestCase(false, 1f, true, false)]
+        [TestCase(false, 0f, false, false)]
+        [TestCase(false, 0f, true, true)]
+        public void CanFrontalShootTests
+        (
+            bool shipIsDestroyed,
+            float remainingTimeForFrontalShoot,
+            bool targetIsNear,
+            bool expected
+        )
         {
-            const float remainingTimeForShoot = 1f;
+            _ship.IsDestroyed.Returns(shipIsDestroyed);
 
-            _shipPresenter = new AIShooterShipPresenter(_ship, _shipView, remainingTimeForShoot);
+            SetTargetDistance(targetIsNear);
+
+            _shipPresenter = new AIShooterShipPresenter(_ship, _shipView, remainingTimeForFrontalShoot);
 
             var canShoot = _shipPresenter.CanFrontalShoot();
 
-            Assert.IsFalse(canShoot, "Should return false when remaining time for shoot is not zero.");
+            Assert.AreEqual(expected, canShoot);
         }
 
         [Test]
-        public void CanShoot_WhenRemainingTimeForShootIsZeroAndTargetIsNear_ShouldReturnTrue()
+        public void CanMove_WhenShipIsDestroyed_ReturnFalse()
         {
+            _ship.IsDestroyed.Returns(true);
+
             _shipPresenter = new AIShooterShipPresenter(_ship, _shipView);
 
-            _ship.ShootingRange.Returns(1f);
-            _ship.Position.Returns(new Vector2(0f, 0f));
-            _ship.Target.Position.Returns(new Vector2(0f, 0.5f));
+            var canMove = _shipPresenter.CanMove();
 
-            var canShoot = _shipPresenter.CanFrontalShoot();
-
-            Assert.IsTrue(canShoot,
-                "Should return true when remaining time for shoot is zero and target is near.");
+            Assert.IsFalse(canMove, "Should return false when ship is destroyed.");
         }
 
         [Test]
-        public void CanShoot_WhenRemainingTimeForShootIsZeroAndTargetIsNotNear_ShouldReturnFalse()
+        public void CanMove_WhenTargetIsNear_ReturnFalse()
         {
+            const bool targetIsNear = true;
+
             _shipPresenter = new AIShooterShipPresenter(_ship, _shipView);
 
-            _ship.ShootingRange.Returns(1f);
-            _ship.Position.Returns(new Vector2(0f, 0f));
-            _ship.Target.Position.Returns(new Vector2(0f, 1.5f));
-
-            var canShoot = _shipPresenter.CanFrontalShoot();
-
-            Assert.IsFalse(canShoot,
-                "Should return false when remaining time for shoot is zero and target is not near.");
-        }
-
-        [Test]
-        public void CanMove_WhenTargetIsNear_ShouldReturnFalse()
-        {
-            _shipPresenter = new AIShooterShipPresenter(_ship, _shipView);
-
-            _ship.ShootingRange.Returns(1f);
-            _ship.Position.Returns(new Vector2(0f, 0f));
-            _ship.Target.Position.Returns(new Vector2(0f, 0.5f));
+            SetTargetDistance(targetIsNear);
 
             var canMove = _shipPresenter.CanMove();
 
@@ -81,15 +74,22 @@ namespace Tests.Presenter
         [Test]
         public void CanMove_WhenTargetIsNotNear_ShouldReturnTrue()
         {
+            const bool targetIsNear = false;
+
             _shipPresenter = new AIShooterShipPresenter(_ship, _shipView);
 
-            _ship.ShootingRange.Returns(1f);
-            _ship.Position.Returns(new Vector2(0f, 0f));
-            _ship.Target.Position.Returns(new Vector2(0f, 1.5f));
+            SetTargetDistance(targetIsNear);
 
             var canMove = _shipPresenter.CanMove();
 
             Assert.IsTrue(canMove, "Should return true when target is not near.");
+        }
+
+        private void SetTargetDistance(bool targetIsNear)
+        {
+            _ship.ShootingRange.Returns(1f);
+            _ship.Position.Returns(new Vector2(0f, 0f));
+            _ship.Target.Position.Returns(new Vector2(0f, targetIsNear ? 0.5f : 1.5f));
         }
     }
 }

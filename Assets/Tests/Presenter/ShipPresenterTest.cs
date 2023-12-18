@@ -59,5 +59,81 @@ namespace Tests.Presenter
             _shipView.Received().Rotate(expectedRotation);
             _ship.Received().RotationAngle = shipViewRotation;
         }
+
+        [Test]
+        public void
+            TakeDamage_WhenAmountIsGreaterOrEqualCurrentHealth_ShouldSetCurrentHealthToZeroAndExplodeAndUpdateHealthBarSlider()
+        {
+            const float amount = 15f;
+            const float currentHealth = 10f;
+            const float maxHealth = 10f;
+
+            _ship.CurrentHealth.Returns(currentHealth);
+            _ship.MaxHealth.Returns(maxHealth);
+
+            _shipPresenter.TakeDamage(amount);
+
+            _ship.Received().CurrentHealth = 0f;
+            _shipView.Received().Explode();
+            _shipView.Received().UpdateHealthBarSlider(0f);
+        }
+
+        [Test]
+        public void
+            TakeDamage_WhenAmountIsLessThanCurrentHealth_ShouldUpdateCurrentHealthAndNotExplodeAndUpdateHealthBarSlider()
+        {
+            const float amount = 10f;
+            const float currentHealth = 15f;
+            const float maxHealth = 20f;
+
+            _ship.CurrentHealth.Returns(currentHealth);
+            _ship.MaxHealth.Returns(maxHealth);
+
+            _shipPresenter.TakeDamage(amount);
+
+            _ship.Received().CurrentHealth = 5f;
+            _shipView.DidNotReceive().Explode();
+            _shipView.Received().UpdateHealthBarSlider(25f);
+        }
+
+        [Test]
+        public void CanMove_WhenShipIsDestroyed_ReturnFalse()
+        {
+            _ship.IsDestroyed.Returns(true);
+
+            var canMove = _shipPresenter.CanMove();
+
+            Assert.IsFalse(canMove, "Should return false when ship is destroyed.");
+        }
+
+        [Test]
+        public void CanMove_WhenShipIsNotDestroyed_ReturnTrue()
+        {
+            _ship.IsDestroyed.Returns(false);
+
+            var canMove = _shipPresenter.CanMove();
+
+            Assert.IsTrue(canMove, "Should return true when ship is not destroyed.");
+        }
+
+        [Test]
+        public void CanRotate_WhenShipIsDestroyed_ReturnFalse()
+        {
+            _ship.IsDestroyed.Returns(true);
+
+            var canRotate = _shipPresenter.CanRotate();
+
+            Assert.IsFalse(canRotate, "Should return false when ship is destroyed.");
+        }
+
+        [Test]
+        public void CanRotate_WhenShipIsNotDestroyed_ReturnTrue()
+        {
+            _ship.IsDestroyed.Returns(false);
+
+            var canRotate = _shipPresenter.CanRotate();
+
+            Assert.IsTrue(canRotate, "Should return true when ship is not destroyed.");
+        }
     }
 }

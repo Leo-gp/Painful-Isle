@@ -11,5 +11,6 @@ namespace Model.ShipModel
         ShipDeterioration ShipDeterioration { get; set; }
         Vector2 Position { get; set; }
         float RotationAngle { get; set; }
+        bool IsDestroyed { get; }
     }
 }

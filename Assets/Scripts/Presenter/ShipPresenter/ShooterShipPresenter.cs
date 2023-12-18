@@ -36,7 +36,10 @@ namespace Presenter.ShipPresenter
             RemainingTimeForFrontalShoot = _ship.FrontalShootCooldown;
         }
 
-        public abstract bool CanFrontalShoot();
+        public virtual bool CanFrontalShoot()
+        {
+            return !Ship.IsDestroyed && RemainingTimeForFrontalShoot <= 0f;
+        }
 
         public virtual void UpdateShootCooldown(float elapsedTime)
         {

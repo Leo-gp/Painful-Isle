@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d46ff343924f559bd5636c42543ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cannonBallData: {fileID: 11400000, guid: 50deb9d6b04246e49bff66c6100bcaf7, type: 2}
   speed: 10
   explosionAnimation: {fileID: 7400000, guid: e71401a5866e27d4aaff65323fd63e8f, type: 2}
   explosionSound: {fileID: 8300000, guid: a88ded4025b8e91489ca2189cb6d8c2a, type: 3}

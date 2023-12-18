@@ -1,3 +1,4 @@
+using System;
 using Model.ShipModel;
 using View.ShipView;
 
@@ -27,13 +28,26 @@ namespace Presenter.ShipPresenter
             Ship.RotationAngle = ShipView.Rotation;
         }
 
-        protected void Explode()
+        public void TakeDamage(float amount)
         {
-            ShipView.Explode();
+            Ship.CurrentHealth = MathF.Max(Ship.CurrentHealth - amount, 0f);
+            if (Ship.CurrentHealth <= 0f) Explode();
+            ShipView.UpdateHealthBarSlider(Ship.CurrentHealth / Ship.MaxHealth * 100f);
         }
 
-        private void TakeDamage()
+        public virtual bool CanMove()
         {
+            return !Ship.IsDestroyed;
+        }
+
+        public virtual bool CanRotate()
+        {
+            return !Ship.IsDestroyed;
+        }
+
+        private void Explode()
+        {
+            ShipView.Explode();
         }
     }
 }

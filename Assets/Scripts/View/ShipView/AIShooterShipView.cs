@@ -14,15 +14,9 @@ namespace View.ShipView
 
         protected override void Awake()
         {
-            // TODO: Create factory to handle this
-            Initialize(FindObjectOfType<PlayerShooterShipView>().ShipPresenter.Ship);
+            _target = FindObjectOfType<PlayerShooterShipView>().ShipPresenter.Ship;
 
             base.Awake();
-        }
-
-        public void Initialize(IShip target)
-        {
-            _target = target;
         }
 
         protected override IShipPresenter CreateShipPresenter()
@@ -38,7 +32,7 @@ namespace View.ShipView
             return new AIShooterShipInputHandler(ship, shipPresenter);
         }
 
-        private IAIShooterShip CreateShip() // TODO: Create factory to handle this
+        private IAIShooterShip CreateShip()
         {
             var maxHealth = shipData.Health;
             var moveSpeed = shipData.MoveSpeed;

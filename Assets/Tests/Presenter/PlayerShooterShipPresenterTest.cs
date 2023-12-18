@@ -7,16 +7,9 @@ using View.ShipView;
 
 namespace Tests.Presenter
 {
+    [TestFixture]
     public class PlayerShooterShipPresenterTest
     {
-        private const float ShootPositionOffset = 0.7f;
-        private const float SideShootCannonBallsOffset = 0.4f;
-
-        private IPlayerShooterShip _ship;
-
-        private PlayerShooterShipPresenter _shipPresenter;
-        private IShooterShipView _shipView;
-
         [SetUp]
         public void SetUp()
         {
@@ -27,6 +20,14 @@ namespace Tests.Presenter
             _shipView.UpVector.Returns(new Vector2(0, 1));
             _shipView.RightVector.Returns(new Vector2(1, 0));
         }
+
+        private const float ShootPositionOffset = 0.7f;
+        private const float SideShootCannonBallsOffset = 0.4f;
+
+        private IPlayerShooterShip _ship;
+
+        private PlayerShooterShipPresenter _shipPresenter;
+        private IShooterShipView _shipView;
 
         [Test]
         public void RightShoot_WhenCannotSideShoot_ShouldNotCallViewShoot()

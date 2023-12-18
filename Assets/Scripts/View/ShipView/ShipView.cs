@@ -1,6 +1,7 @@
 using Model.ShipModel.ShipInputHandler;
 using Presenter.ShipPresenter;
 using UnityEngine;
+using View.UI;
 using Vector2 = System.Numerics.Vector2;
 
 namespace View.ShipView
@@ -10,7 +11,10 @@ namespace View.ShipView
     [RequireComponent(typeof(Collider2D))]
     public abstract class ShipView : MonoBehaviour, IShipView
     {
+        [SerializeField] private HealthBarView healthBarViewPrefab;
+
         private Collider2D _collider;
+        private IHealthBarView _healthBarView;
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
 
@@ -23,6 +27,7 @@ namespace View.ShipView
             _spriteRenderer = GetComponent<SpriteRenderer>();
             ShipPresenter = CreateShipPresenter();
             ShipInputHandler = CreateShipInputHandler();
+            _healthBarView = CreateHealthBarView();
         }
 
         protected virtual void Update()
@@ -54,7 +59,19 @@ namespace View.ShipView
         public void Explode()
         {
             _collider.enabled = false;
-            ShipInputHandler.DisableInputs();
+        }
+
+        public void UpdateHealthBarSlider(float percentage)
+        {
+            _healthBarView.UpdateHealthBarSlider(percentage);
+        }
+
+        private IHealthBarView CreateHealthBarView()
+        {
+            var healthBarView = Instantiate(healthBarViewPrefab);
+            healthBarView.Initialize(ShipPresenter.Ship);
+            healthBarView.name = $"{name} HealthBar";
+            return healthBarView;
         }
 
         protected abstract IShipPresenter CreateShipPresenter();

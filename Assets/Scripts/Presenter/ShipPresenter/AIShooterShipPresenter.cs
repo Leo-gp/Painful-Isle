@@ -20,12 +20,12 @@ namespace Presenter.ShipPresenter
 
         public override bool CanFrontalShoot()
         {
-            return RemainingTimeForFrontalShoot <= 0f && TargetIsNear();
+            return base.CanFrontalShoot() && TargetIsNear();
         }
 
-        public bool CanMove()
+        public override bool CanMove()
         {
-            return !TargetIsNear();
+            return base.CanMove() && !TargetIsNear();
         }
 
         private bool TargetIsNear()

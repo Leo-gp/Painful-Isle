@@ -41,11 +41,6 @@ namespace Presenter.ShipPresenter
             RemainingTimeForSideShoot = _ship.SideShootCooldown;
         }
 
-        public override bool CanFrontalShoot()
-        {
-            return RemainingTimeForFrontalShoot <= 0f;
-        }
-
         public override void UpdateShootCooldown(float elapsedTime)
         {
             base.UpdateShootCooldown(elapsedTime);

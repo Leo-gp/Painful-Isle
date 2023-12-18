@@ -20,5 +20,7 @@ namespace View.ShipView
         void Rotate(float angle);
 
         void Explode();
+
+        void UpdateHealthBarSlider(float percentage);
     }
 }

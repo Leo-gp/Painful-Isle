@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace Model.ShipModel.ShipData
 {
-    [CreateAssetMenu(menuName = "Create Ship Data", fileName = "Ship Data")]
-    public class ShipData : ScriptableObject
+    public abstract class ShipData : ScriptableObject
     {
         [SerializeField] private float health;
         [SerializeField] private float moveSpeed;

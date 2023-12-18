@@ -3,6 +3,7 @@ using Model.ShipModel;
 using Model.ShipModel.ShipInputHandler;
 using NSubstitute;
 using NUnit.Framework;
+using Presenter.ShipPresenter;
 
 namespace Tests.Model
 {
@@ -13,35 +14,50 @@ namespace Tests.Model
         public void SetUp()
         {
             _ship = Substitute.For<IAIShip>();
+            _shipPresenter = Substitute.For<IShipPresenter>();
 
-            _inputHandler = new AIShipInputHandler(_ship);
+            _inputHandler = new AIShipInputHandler(_ship, _shipPresenter);
         }
 
         private IAIShip _ship;
+        private IShipPresenter _shipPresenter;
 
         private AIShipInputHandler _inputHandler;
 
         [Test]
-        public void MoveInput_ShouldReturnOne()
+        public void MoveInput_WhenCanMove_ReturnOne()
         {
-            var moveInput = _inputHandler.MoveInput;
-
-            Assert.AreEqual(1f, moveInput, "Move input should be one.");
-        }
-
-        [Test]
-        public void MoveInput_WhenInputsAreDisabled_ShouldReturnZero()
-        {
-            _inputHandler.DisableInputs();
+            _shipPresenter.CanMove().Returns(true);
 
             var moveInput = _inputHandler.MoveInput;
 
-            Assert.AreEqual(0f, moveInput, "Move input should be zero when inputs are disabled.");
+            Assert.AreEqual(1f, moveInput, "Move input should be one when can move.");
         }
 
         [Test]
-        public void RotateInput_WhenSelfIsFacingTarget_ReturnZero()
+        public void MoveInput_WhenCannotMove_ReturnZero()
         {
+            _shipPresenter.CanMove().Returns(false);
+
+            var moveInput = _inputHandler.MoveInput;
+
+            Assert.AreEqual(0f, moveInput, "Move input should be zero when cannot move.");
+        }
+
+        [Test]
+        public void RotateInput_WhenCannotRotate_ReturnZero()
+        {
+            _shipPresenter.CanRotate().Returns(false);
+
+            var rotationInput = _inputHandler.RotateInput;
+
+            Assert.AreEqual(0f, rotationInput, "Rotation input should be zero when cannot rotate.");
+        }
+
+        [Test]
+        public void RotateInput_WhenCanRotateAndSelfIsFacingTarget_ReturnZero()
+        {
+            _shipPresenter.CanRotate().Returns(true);
             _ship.Position.Returns(new Vector2(0f, 0f));
             _ship.RotationAngle.Returns(0f);
             _ship.Target.Position.Returns(new Vector2(0f, -10f));
@@ -52,8 +68,9 @@ namespace Tests.Model
         }
 
         [Test]
-        public void RotateInput_WhenAngleToTargetIsPositive_ReturnNegativeValue()
+        public void RotateInput_WhenCanRotateAndAngleToTargetIsPositive_ReturnNegativeValue()
         {
+            _shipPresenter.CanRotate().Returns(true);
             _ship.Position.Returns(new Vector2(0f, 0f));
             _ship.RotationAngle.Returns(0f);
             _ship.Target.Position.Returns(new Vector2(10f, 5f));
@@ -65,8 +82,9 @@ namespace Tests.Model
         }
 
         [Test]
-        public void RotateInput_WhenAngleToTargetIsNegative_ReturnPositiveValue()
+        public void RotateInput_WhenCanRotateAngleToTargetIsNegative_ReturnPositiveValue()
         {
+            _shipPresenter.CanRotate().Returns(true);
             _ship.Position.Returns(new Vector2(0f, 0f));
             _ship.RotationAngle.Returns(0f);
             _ship.Target.Position.Returns(new Vector2(-10f, 5f));
@@ -75,16 +93,6 @@ namespace Tests.Model
 
             Assert.That(rotationInput, Is.GreaterThan(0),
                 "Rotation input should be positive when angle to target is negative.");
-        }
-
-        [Test]
-        public void RotateInput_WhenInputsAreDisabled_ShouldReturnZero()
-        {
-            _inputHandler.DisableInputs();
-
-            var rotationInput = _inputHandler.RotateInput;
-
-            Assert.AreEqual(0f, rotationInput, "Rotation input should be zero when inputs are disabled.");
         }
     }
 }

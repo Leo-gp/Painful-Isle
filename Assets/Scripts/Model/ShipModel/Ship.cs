@@ -26,5 +26,7 @@ namespace Model.ShipModel
         public Vector2 Position { get; set; }
 
         public float RotationAngle { get; set; }
+
+        public bool IsDestroyed => CurrentHealth <= 0f;
     }
 }
