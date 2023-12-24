@@ -9,10 +9,11 @@ namespace Model.ShipModel.ShipData
             fileName = "Ship Deterioration Configurations"
         )
     ]
-    public class ShipDeteriorationConfiguration : ScriptableObject
+    public class ShipDeteriorationConfiguration : ScriptableObject, IShipDeteriorationConfiguration
     {
         [SerializeField] private List<ShipDeteriorationDefinition> deteriorationDefinitions;
 
-        public List<ShipDeteriorationDefinition> DeteriorationDefinitions => deteriorationDefinitions;
+        public List<IShipDeteriorationDefinition> DeteriorationDefinitions =>
+            deteriorationDefinitions.ConvertAll(x => (IShipDeteriorationDefinition)x);
     }
 }

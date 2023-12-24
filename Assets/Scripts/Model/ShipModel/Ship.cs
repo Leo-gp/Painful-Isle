@@ -10,7 +10,7 @@ namespace Model.ShipModel
             float maxHealth,
             float moveSpeed,
             float rotationSpeed,
-            ShipDeteriorationConfiguration deteriorationConfiguration
+            IShipDeteriorationConfiguration deteriorationConfiguration
         )
         {
             MaxHealth = maxHealth;
@@ -30,7 +30,7 @@ namespace Model.ShipModel
 
         public ShipDeterioration Deterioration { get; set; }
 
-        public ShipDeteriorationConfiguration DeteriorationConfiguration { get; }
+        public IShipDeteriorationConfiguration DeteriorationConfiguration { get; }
 
         public Vector2 Position { get; set; }
 

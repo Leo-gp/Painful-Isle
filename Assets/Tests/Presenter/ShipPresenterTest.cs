@@ -17,6 +17,9 @@ namespace Tests.Presenter
             _shipView = Substitute.For<IShipView>();
 
             _shipPresenter = Substitute.ForPartsOf<ShipPresenter>(_ship, _shipView);
+
+            var shipDeteriorationConfiguration = ShipPresenterFixture.ShipDeteriorationConfiguration;
+            _ship.DeteriorationConfiguration.Returns(shipDeteriorationConfiguration);
         }
 
         private IShip _ship;
@@ -60,40 +63,33 @@ namespace Tests.Presenter
             _ship.Received().RotationAngle = shipViewRotation;
         }
 
-        [Test]
-        public void
-            TakeDamage_WhenAmountIsGreaterOrEqualCurrentHealth_ShouldSetCurrentHealthToZeroAndAndExplodeAndUpdateHealthBarSlider()
+        [TestCase(10f, 100f, 100f, 90f, ShipDeterioration.Healthy, false, 90f)]
+        [TestCase(10f, 60f, 100f, 50f, ShipDeterioration.Damaged, false, 50f)]
+        [TestCase(15f, 25f, 50f, 10f, ShipDeterioration.Critical, false, 20f)]
+        [TestCase(50f, 30f, 50f, 0f, ShipDeterioration.Destroyed, true, 0f)]
+        public void TakeDamageTests
+        (
+            float amount,
+            float currentHealth,
+            float maxHealth,
+            float expectedCurrentHealth,
+            ShipDeterioration expectedDeterioration,
+            bool shouldExplode,
+            float healthBarPercentage
+        )
         {
-            const float amount = 15f;
-            const float currentHealth = 10f;
-            const float maxHealth = 10f;
-
             _ship.CurrentHealth.Returns(currentHealth);
             _ship.MaxHealth.Returns(maxHealth);
 
             _shipPresenter.TakeDamage(amount);
 
-            _ship.Received().CurrentHealth = 0f;
-            _shipView.Received().Explode();
-            _shipView.Received().UpdateHealthBarSlider(0f);
-        }
+            _ship.Received().CurrentHealth = expectedCurrentHealth;
+            _ship.Received().Deterioration = expectedDeterioration;
+            _shipView.Received().UpdateDeterioration(expectedDeterioration);
+            _shipView.Received().UpdateHealthBarSlider(healthBarPercentage);
 
-        [Test]
-        public void
-            TakeDamage_WhenAmountIsLessThanCurrentHealth_ShouldUpdateCurrentHealthAndNotExplodeAndUpdateHealthBarSlider()
-        {
-            const float amount = 10f;
-            const float currentHealth = 15f;
-            const float maxHealth = 20f;
-
-            _ship.CurrentHealth.Returns(currentHealth);
-            _ship.MaxHealth.Returns(maxHealth);
-
-            _shipPresenter.TakeDamage(amount);
-
-            _ship.Received().CurrentHealth = 5f;
-            _shipView.DidNotReceive().Explode();
-            _shipView.Received().UpdateHealthBarSlider(25f);
+            if (shouldExplode) _shipView.Received().Explode();
+            else _shipView.DidNotReceive().Explode();
         }
 
         [Test]

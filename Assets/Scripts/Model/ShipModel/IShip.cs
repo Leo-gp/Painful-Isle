@@ -10,7 +10,7 @@ namespace Model.ShipModel
         float RotationSpeed { get; }
         float CurrentHealth { get; set; }
         ShipDeterioration Deterioration { get; set; }
-        ShipDeteriorationConfiguration DeteriorationConfiguration { get; }
+        IShipDeteriorationConfiguration DeteriorationConfiguration { get; }
         Vector2 Position { get; set; }
         float RotationAngle { get; set; }
         bool IsDestroyed { get; }

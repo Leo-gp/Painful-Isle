@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Model.ShipModel.ShipData
 {
     [Serializable]
-    public struct ShipDeteriorationDefinition
+    public struct ShipDeteriorationDefinition : IShipDeteriorationDefinition
     {
         [SerializeField] private float health;
         [SerializeField] private ShipDeterioration deterioration;
