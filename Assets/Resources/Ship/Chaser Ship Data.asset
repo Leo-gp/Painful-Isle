@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chaser Ship Data
   m_EditorClassIdentifier: 
   health: 50
-  moveSpeed: 10
-  rotationSpeed: 1
+  moveSpeed: 60
+  rotationSpeed: 1.2
   deteriorationConfiguration: {fileID: 11400000, guid: ccf929c12a9b91b48b69e255361d8a7c, type: 2}
   explosionDamage: 25

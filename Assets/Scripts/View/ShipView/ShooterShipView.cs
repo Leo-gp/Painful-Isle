@@ -21,10 +21,8 @@ namespace View.ShipView
             _shipInputHandler = ShipInputHandler as IShooterShipInputHandler;
         }
 
-        protected override void Update()
+        protected virtual void Update()
         {
-            base.Update();
-
             if (_shipInputHandler.FrontalShootInput) _shipPresenter.FrontalShoot();
 
             _shipPresenter.UpdateShootCooldown(Time.deltaTime);

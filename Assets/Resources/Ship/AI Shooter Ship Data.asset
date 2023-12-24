@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86fde4dd1543fb8e43fe6aacbb6565, type: 3}
   m_Name: AI Shooter Ship Data
   m_EditorClassIdentifier: 
-  health: 100
-  moveSpeed: 10
-  rotationSpeed: 0.4
+  health: 75
+  moveSpeed: 50
+  rotationSpeed: 1.2
   deteriorationConfiguration: {fileID: 11400000, guid: ccf929c12a9b91b48b69e255361d8a7c, type: 2}
-  frontalShootCooldown: 5
-  shootingRange: 5
+  frontalShootCooldown: 3
+  shootingRange: 10

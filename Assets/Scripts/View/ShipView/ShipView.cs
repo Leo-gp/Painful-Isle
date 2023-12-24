@@ -35,7 +35,7 @@ namespace View.ShipView
             _healthBarView = CreateHealthBarView();
         }
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             ShipPresenter.Move(ShipInputHandler.MoveInput);
             ShipPresenter.Rotate(ShipInputHandler.RotateInput);
